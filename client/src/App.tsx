@@ -1,11 +1,17 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 function App() {
   // Creating a react hook (Storing in State)
   const [products, setProducts] = useState([
-    { name: 'Cassava', price: 100 },
-    { name: 'Potats', price: 200 }
+    { name: 'Product 1', price: 100 },
+    { name: 'Product 2', price: 200 }
   ])
+
+  useEffect(() => {
+    fetch("http://localhost:5106/api/products")
+      .then(response => response.json())
+      .then(data => setProducts(data))
+  }, [])
 
   // function addProduct() {
   //   setProducts([...products, { name: 'Potats', price: 344 }])
@@ -18,11 +24,11 @@ function App() {
     <div>
       <h1>Cuk App</h1>
       <ul>
-        {products.map((item, index) => {
-          return <li key={index}>{item.name} - {item.price}</li>
+        {products.map((product, index) => {
+          return <li key={index}> {product.name} - {product.price}</li>
         })}
       </ul>
-      <button onClick={addProduct}>Add Product</button>
+      <button onClick={addProduct}>Add Value</button>
     </div>
 
   );

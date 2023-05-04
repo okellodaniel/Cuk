@@ -13,6 +13,7 @@ builder.Services.AddDbContext<CukContext>(o =>
 {
     o.UseSqlite(builder.Configuration.GetConnectionString("DefaultConnection"));
 });
+builder.Services.AddCors();
 
 var app = builder.Build();
 
@@ -24,6 +25,14 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+
+app.UseCors(o =>
+{
+    o.AllowAnyHeader();
+    o.AllowAnyMethod();
+    o.WithOrigins("http://localhost:3000");
+});
+
 
 app.UseAuthorization();
 
