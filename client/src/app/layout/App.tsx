@@ -1,7 +1,8 @@
 import { useEffect, useState } from "react";
 import { Product } from "../models/Product";
 import Catalogue from "../../features/catalogue/catalogue";
-import { Typography } from "@mui/material";
+import { Container, CssBaseline } from "@mui/material";
+import NavBar from "./NavigationBar";
 
 function App() {
   // Creating a react hook (Storing in State)
@@ -13,9 +14,6 @@ function App() {
       .then(data => setProducts(data))
   }, [])
 
-  // function addProduct() {
-  //   setProducts([...products, { name: 'Potats', price: 344 }])
-  // }
   function addProduct() {
     setProducts(prevState => [...prevState,
     {
@@ -30,10 +28,12 @@ function App() {
 
   return (
     <>
-      <Typography variant="h1">Cuk App</Typography>
-      <Catalogue products={products} addProduct={addProduct} />
+      <CssBaseline />
+      <NavBar />
+      <Container>
+        <Catalogue products={products} addProduct={addProduct} />
+      </Container>
     </>
-
   );
 }
 
