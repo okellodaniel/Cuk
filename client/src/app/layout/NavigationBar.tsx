@@ -1,18 +1,50 @@
-import { AppBar, Switch, Toolbar, Typography } from "@mui/material";
+import { AppBar, List, ListItem, Switch, Toolbar, Typography } from "@mui/material";
+import { NavLink } from "react-router-dom";
 
-interface Props{
+interface Props {
 
     darkMode: boolean;
     handleThemeChange: () => void;
 }
 
-function NavBar({darkMode,handleThemeChange}: Props) {
+const midLinks = [
+    { title: 'catalogue', path: '/catalogue' },
+    { title: 'about', path: '/about' },
+    { title: 'contact', path: '/contact' }
+]
+
+const accountLinks = [
+    { title: 'login', path: '/login' },
+    { title: 'register', path: '/register' },
+]
+
+const NavBar = ({ darkMode, handleThemeChange }: Props) => {
     return (
         <>
             <AppBar position="static" sx={{ mb: 3 }}>
                 <Toolbar>
                     <Typography variant="h6"> Cuk</Typography>
-                    <Switch checked = {darkMode} onChange={handleThemeChange} />
+                    <Switch checked={darkMode} onChange={handleThemeChange} />
+                    <List sx={{ display: 'flex' }}>
+                        {midLinks.map(({ title, path }) => (
+                            <ListItem
+                                component={NavLink}
+                                to={path}
+                                key={path}
+                                sx={{ color: 'inherit', typography: 'h6' }}
+                            >{title.toLocaleUpperCase()}</ListItem>
+                        ))}
+                    </List>
+                    <List sx={{ display: 'flex' }}>
+                        {accountLinks.map(({ title, path }) => (
+                            <ListItem
+                                component={NavLink}
+                                to={path}
+                                key={path}
+                                sx={{ color: 'inherit', typography: 'h6' }}
+                            >{title.toLocaleUpperCase()}</ListItem>
+                        ))}
+                    </List>
                 </Toolbar>
             </AppBar>
         </>
