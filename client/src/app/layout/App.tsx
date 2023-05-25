@@ -1,7 +1,7 @@
-import Catalogue from "../../features/catalogue/catalogue";
 import { Container, CssBaseline, ThemeProvider, createTheme } from "@mui/material";
 import NavBar from "./NavigationBar";
 import { useState } from "react";
+import { Outlet } from "react-router-dom";
 
 function App() {
 
@@ -24,7 +24,7 @@ function App() {
       <CssBaseline />
       <NavBar darkMode={darkMode} handleThemeChange={handleThemeChange} />
       <Container>
-        <Catalogue />
+        <Outlet />
       </Container>
     </ThemeProvider>
   );
